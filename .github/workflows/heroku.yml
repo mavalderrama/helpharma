@@ -34,4 +34,4 @@ jobs:
         # Dokerfile path
         # dockerfile_path: .
         # Optional build parameters
-        options: -t mavalderrama/helpharma -f Dockerfile frontend
+        options: -f Dockerfile frontend
