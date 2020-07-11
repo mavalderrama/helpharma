@@ -3,4 +3,4 @@ services:
   pharma_hell:
     build:
       context: frontend
-      dockerfile: .
+      dockerfile: ./Dockerfile
