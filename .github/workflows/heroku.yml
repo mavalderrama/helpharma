@@ -21,17 +21,10 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
-    - name: Deploy to Heroku Using Docker
-      uses: mtsmachado8/heroku-deploy@v2.0.3
+    - uses: akhileshns/heroku-deploy@v3.2.6 # This is the action
       with:
-        # Email Linked to your Heroku Account
-        email: mavalderrama@outlook.com
-        # Your Heroku API Key
-        api_key: 5c9c00c3-fa3f-4b11-b06a-7a74c098f40d
-        # Your Heroku App Name
-        app_name: helpharma
-        # Dokerfile path
-        dockerfile_path: Dockerfile
-        # Optional build parameters
-        options: #
+        heroku_api_key: "5c9c00c3-fa3f-4b11-b06a-7a74c098f40d" #${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "helpharma_frontend" #Must be unique in Heroku
+        heroku_email: "mavalderrama@outlook.com"
+        usedocker: true
+        appdir: "frontend"

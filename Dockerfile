@@ -14,8 +14,6 @@ RUN apt-get update -y \
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 
 RUN chmod +x /usr/bin/tini \
-    && chmod u+x scripts/.run_dash.sh \
-    && mv scripts/.run_dash.sh /.run_dash \
     && pip3 install -r requirements.txt
 
 EXPOSE 8080
