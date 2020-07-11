@@ -24,7 +24,7 @@ jobs:
     - uses: akhileshns/heroku-deploy@v3.2.6 # This is the action
       with:
         heroku_api_key: "5c9c00c3-fa3f-4b11-b06a-7a74c098f40d" #${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "helpharma_frontend" #Must be unique in Heroku
+        heroku_app_name: "helpharmafrontend" #Must be unique in Heroku
         heroku_email: "mavalderrama@outlook.com"
         usedocker: true
         appdir: "frontend"
