@@ -28,4 +28,4 @@ jobs:
         email: "mavalderrama@outlook.com" # your heroku email
         api_key: "5c9c00c3-fa3f-4b11-b06a-7a74c098f40d" # your  heroku api key
         docker_compose_file: './docker-compose.yml' # set the path to the folder where the docker-compose file is located
-        heroku_apps: '[{"imagename":"helpharma_pharma_hell","appname":"hellpharma_front","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
+        heroku_apps: '[{"imagename":"helpharma_pharma_hell","appname":"hellpharmafront","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
