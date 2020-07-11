@@ -22,11 +22,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Build, Push and Deploy to Heroku #set the whatever name you want to this step
-        id: heroku
-        uses: jctaveras/heroku-deploy@v1.0.0  # use the latest version of the action
-        with:
-          email: "mavalderrama@outlook.com" # your heroku email
-          api_key: "5c9c00c3-fa3f-4b11-b06a-7a74c098f40d" # your  heroku api key
-          app_name: "helpharmafrontend" # you aplication name
-          dockerfile_path: '' # set the path to the folder wher the Dokerfile is located
-          options: "frontend" # Docker Build Options
+      id: heroku
+      uses: jctaveras/heroku-deploy@v2.0.0  # use the latest version of the action
+      with:
+        email: "mavalderrama@outlook.com" # your heroku email
+        api_key: "5c9c00c3-fa3f-4b11-b06a-7a74c098f40d" # your  heroku api key
+        app_name: "helpharmafrontend" # you aplication name
+        dockerfile_path: '' # set the path to the folder wher the Dokerfile is located
+        options: "frontend" # Docker Build Options
