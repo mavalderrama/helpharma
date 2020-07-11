@@ -32,6 +32,6 @@ jobs:
         # Your Heroku App Name
         app_name: helpharma
         # Dokerfile path
-         dockerfile_path: Dockerfile
+        dockerfile_path: Dockerfile
         # Optional build parameters
         options: #
