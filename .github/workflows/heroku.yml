@@ -25,7 +25,7 @@ jobs:
       id: heroku
       uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0  # use the latest version of the action
       with:
-        email: "mavalderrama@outlook.com" # your heroku email
-        api_key: "5c9c00c3-fa3f-4b11-b06a-7a74c098f40d" # your  heroku api key
+        email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
+        api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
         docker_compose_file: './docker-compose.yml' # set the path to the folder where the docker-compose file is located
-        heroku_apps: '[{"imagename":"helpharma_pharma_hell","appname":"hellpharmafront","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
+        heroku_apps: '[{"imagename":"helpharma_pharma_hell","appname":"helpharmafront","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
