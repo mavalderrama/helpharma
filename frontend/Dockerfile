@@ -5,7 +5,6 @@ WORKDIR helpharma
 COPY . .
 
 ENV TINI_VERSION v0.19.0
-ENV PORTS ${PORT}
 
 RUN apt-get update -y \
     && apt-get upgrade -y \
@@ -17,8 +16,4 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 RUN chmod +x /usr/bin/tini \
     && pip3 install -r requirements.txt
 
-
-
-EXPOSE PORTS
-
-CMD python3.8 app.py PORTS
+CMD python3.8 app.py $PORT
