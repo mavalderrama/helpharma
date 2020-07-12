@@ -74,4 +74,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children=[
 # Configuring APP running as Web 
 if __name__ == '__main__':
     # app.run_server(debug=True)
-    app.run_server(host='0.0.0.0', port=sys.argv[1])
+    if len(sys.argv) > 1:
+        app.run_server(host='0.0.0.0', port=sys.argv[1])
+    else:
+        app.run_server(host='0.0.0.0', port=8080)
