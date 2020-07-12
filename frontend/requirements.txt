@@ -1,6 +1,4 @@
 dash
 plotly
 pandas
-dash_bootstrap_components
-dash_core_components
-dash_html_components
+xlrd
