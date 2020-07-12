@@ -8,7 +8,7 @@ import plotly.express as px
 import pandas as pd
 
 ## Riesgo Asociado vs Consultas (1,1) ##
-df_Riesgo_asociado = pd.read_excel("data\Riesgo asociado.xlsx")
+df_Riesgo_asociado = pd.read_excel("/helpharma/data/Riesgo asociado.xlsx")
 IDs_Unicos=df_Riesgo_asociado[['ID','Resultado Total','Fecha']].copy()
 IDs_Unicos=IDs_Unicos.drop_duplicates(keep="first").reset_index().sort_values('ID',ascending=True)
 table=pd.pivot_table(IDs_Unicos,values='Fecha',index='ID',columns='Resultado Total',aggfunc='max')
@@ -19,7 +19,7 @@ df_ra_g0['Consultas_totales']=df_ra_g0['No Aplica']+df_ra_g0['Riesgo Alto']+df_r
 ct=df_ra_g0.groupby(['Consultas_totales'],as_index=False).sum()
 
 ## Terapia Fisica (1,2) ##
-df_Terapia_fisica = pd.read_excel("data\Terapia fisica.xlsx")
+df_Terapia_fisica = pd.read_excel("/helpharma/data/Terapia fisica.xlsx")
 IDs_Unicos=df_Terapia_fisica[['id','Modalidad cita','Fecha']].copy()
 IDs_Unicos=IDs_Unicos.drop_duplicates(keep="first").reset_index().sort_values('id',ascending=True)
 table=pd.pivot_table(IDs_Unicos,values='Fecha',index='id',columns='Modalidad cita',aggfunc='max')
