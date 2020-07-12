@@ -2,6 +2,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import sys
 
 # Read style of internet (css file)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -73,4 +74,4 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children=[
 # Configuring APP running as Web 
 if __name__ == '__main__':
     # app.run_server(debug=True)
-    app.run_server(host='0.0.0.0', port=8080)
+    app.run_server(host='0.0.0.0', port=sys.argv[0])
