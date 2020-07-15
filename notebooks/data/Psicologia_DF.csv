@@ -1,4 +1,4 @@
-ID,Fecha,Ano,Mes,Dia,Depresion mayor,Depresion mayor + ansiedad,Trastorno de ansiedad severa,Trastorno severo de la esfera sexual,Depresion moderada,Trastornos de adaptacion,Problemas familiares,Trastorno leve-moderado de la esfera sexual,Depresion leve,Alta por Psicología,OTRO MOTIVO,Depresion TOTAL,Ansiedad TOTAL,Trastorno Sexual TOTAL,Psi TOTAL
+id,fecha,ano,mes,dia,depresion_mayor,depresion_mayor_+_ansiedad,trastorno_de_ansiedad_severa,trastorno_severo_de_la_esfera_sexual,depresion_moderada,trastornos_de_adaptacion,problemas_familiares,trastorno_leve-moderado_de_la_esfera_sexual,depresion_leve,alta_por_psicologia,otro_motivo,depresion_total,ansiedad_total,trastorno_sexual_total,psi_total
 501389,2020-01-08 16:38:00,2020,1,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0
 501389,2020-01-08 16:38:45,2020,1,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0
 502369,2018-12-05 10:08:20,2018,12,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0
