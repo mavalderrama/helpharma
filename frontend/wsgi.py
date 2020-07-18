@@ -1,22 +1,5 @@
 import sys
-from dash.dependencies import Input, Output
-import plotly.express as px
-from server import app, ct
-
-
-@app.callback(
-    Output(component_id="example-graph", component_property="figure"),
-    [Input(component_id="dropdown-options", component_property="value")],
-)
-def update_figure1(input_value):
-    """
-    update figure 1
-    :param input_value:
-    :return:
-    """
-    figure = px.bar(ct, x="Consultas_totales", y=input_value, barmode="group")
-    return figure
-
+from server import app
 
 # Configuring APP running as Web
 if __name__ == "__main__":
@@ -24,4 +7,4 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         app.run_server(host="0.0.0.0", port=sys.argv[1])
     else:
-        app.run_server(host="0.0.0.0", port=8080)
+        app.run_server(host="0.0.0.0", port=8080, debug=True)

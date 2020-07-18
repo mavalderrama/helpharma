@@ -1,7 +1,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from .plots import fig
+from .riesgo_asociado import fig
 
 # Read style of internet (css file)
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
