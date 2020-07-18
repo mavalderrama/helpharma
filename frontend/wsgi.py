@@ -8,7 +8,12 @@ from server import app, ct
     Output(component_id="example-graph", component_property="figure"),
     [Input(component_id="dropdown-options", component_property="value")],
 )
-def update_figure(input_value):
+def update_figure1(input_value):
+    """
+    update figure 1
+    :param input_value:
+    :return:
+    """
     figure = px.bar(ct, x="Consultas_totales", y=input_value, barmode="group")
     return figure
 

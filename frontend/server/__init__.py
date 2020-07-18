@@ -1,2 +1,2 @@
 from .dashboard import app
-from .plots import ct, fig
+from .riesgo_asociado import ct, fig

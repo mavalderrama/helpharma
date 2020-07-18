@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 
 riesgo_asociado_df = pd.read_excel(list(Path("../").glob("**/riesgo_asociado*"))[0])
-terapia_fisica_df = pd.read_excel(list(Path("../").glob(r"**/terapia_fisica*"))[0])
 
 IDs_Unicos = riesgo_asociado_df[["ID", "Resultado Total", "Fecha"]].copy()
 IDs_Unicos = (
