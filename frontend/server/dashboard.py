@@ -1,26 +1,15 @@
-import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
-from .riesgo_asociado import fig, ct
 import plotly.express as px
+from dash.dependencies import Input, Output
 
-# Read style of internet (css file)
-external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
-# Init my app dash and define my style CSS
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
+from app import app
+from .plots.riesgo_asociado import fig, ct
 
 # Define my layout
 # Adding more CSS styles
 colors = {"background": "#111111", "text": "#7FDBFF"}
-
-# Define LAYOUT
-# This use HTML tags
-# html.H1 : The <h1> to <h6> tags are used to define HTML headings.
-# html.Div : The <div> tag defines a division or a section in an HTML document.
-# app.layout = html.Div(children=[
-app.layout = html.Div(
+layout = html.Div(
     style={"backgroundColor": colors["background"]},
     children=[
         html.Img(
@@ -58,28 +47,7 @@ app.layout = html.Div(
                         dcc.Graph(id="example-graph", animate=True, figure=fig),
                     ],
                     className="six columns",
-                ),
-                # html.Div(
-                #     [
-                #         dcc.Dropdown(
-                #             id="dropdown-options2",
-                #             options=[
-                #                 {
-                #                     "label": "SEGUIMIENTO PRESENCIAL",
-                #                     "value": "SEGUIMIENTO PRESENCIAL",
-                #                 },
-                #                 {
-                #                     "label": "Alta del Programa",
-                #                     "value": "Alta del Programa",
-                #                 },
-                #             ],
-                #             value=["SEGUIMIENTO PRESENCIAL", "Alta del Programa"],
-                #             multi=True,
-                #         ),
-                #         dcc.Graph(id="example-graph2", animate=True, figure=fog),
-                #     ],
-                #     className="six columns",
-                # ),
+                )
             ],
         ),
     ],
@@ -90,7 +58,5 @@ app.layout = html.Div(
     Output(component_id="example-graph", component_property="figure"),
     [Input(component_id="dropdown-options", component_property="value")],
 )
-def update_figure(input_value):
-    figure = px.bar(ct, x="Consultas_totales", y=input_value, barmode="group")
-
-    return figure
+def update_figure_consultas(input_value):
+    return px.bar(ct, x="Consultas_totales", y=input_value, barmode="group")
