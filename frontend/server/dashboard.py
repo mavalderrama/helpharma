@@ -4,7 +4,7 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 
 from app import app
-from .plots.riesgo_asociado import fig, ct
+from .plots.riesgo_asociado import figura_riesgo_asociado, consultas_totales_df
 
 # Define my layout
 # Adding more CSS styles
@@ -44,7 +44,11 @@ layout = html.Div(
                             value=["No Aplica", "Riesgo Alto", "Riesgo Intermedio"],
                             multi=True,
                         ),
-                        dcc.Graph(id="example-graph", animate=True, figure=fig),
+                        dcc.Graph(
+                            id="example-graph",
+                            animate=True,
+                            figure=figura_riesgo_asociado,
+                        ),
                     ],
                     className="six columns",
                 )
@@ -59,4 +63,6 @@ layout = html.Div(
     [Input(component_id="dropdown-options", component_property="value")],
 )
 def update_figure_consultas(input_value):
-    return px.bar(ct, x="Consultas_totales", y=input_value, barmode="group")
+    return px.bar(
+        consultas_totales_df, x="Consultas_totales", y=input_value, barmode="group"
+    )

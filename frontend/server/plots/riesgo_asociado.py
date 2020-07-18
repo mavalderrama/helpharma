@@ -24,10 +24,10 @@ df_ra_g0.fillna(0, inplace=True)
 df_ra_g0["Consultas_totales"] = (
     df_ra_g0["No Aplica"] + df_ra_g0["Riesgo Alto"] + df_ra_g0["Riesgo Intermedio"]
 )
-ct = df_ra_g0.groupby(["Consultas_totales"], as_index=False).sum()
+consultas_totales_df = df_ra_g0.groupby(["Consultas_totales"], as_index=False).sum()
 
-fig = px.bar(
-    ct,
+figura_riesgo_asociado = px.bar(
+    consultas_totales_df,
     x="Consultas_totales",
     y=["No Aplica", "Riesgo Alto", "Riesgo Intermedio"],
     barmode="group",
