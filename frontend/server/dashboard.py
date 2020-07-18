@@ -1,7 +1,9 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from .riesgo_asociado import fig
+from dash.dependencies import Input, Output
+from .riesgo_asociado import fig, ct
+import plotly.express as px
 
 # Read style of internet (css file)
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
@@ -82,3 +84,13 @@ app.layout = html.Div(
         ),
     ],
 )
+
+
+@app.callback(
+    Output(component_id="example-graph", component_property="figure"),
+    [Input(component_id="dropdown-options", component_property="value")],
+)
+def update_figure(input_value):
+    figure = px.bar(ct, x="Consultas_totales", y=input_value, barmode="group")
+
+    return figure
