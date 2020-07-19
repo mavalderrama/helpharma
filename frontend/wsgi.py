@@ -5,7 +5,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app
-from server import dashboard
+from server import riesgo_asociado_layout, dashboard
 
 app.layout = html.Div(
     [dcc.Location(id="url", refresh=False), html.Div(id="page-content")]
@@ -16,6 +16,8 @@ app.layout = html.Div(
 def display_page(pathname):
     if pathname == "/":
         return dashboard.layout
+    elif pathname == "/riesgo":
+        return riesgo_asociado_layout.layout
     else:
         return 404
 
