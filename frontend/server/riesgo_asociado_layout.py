@@ -8,12 +8,12 @@ from .plots.riesgo_asociado import figura_riesgo_asociado, consultas_totales_df
 
 # Define my layout
 # Adding more CSS styles
-colors = {"background": "#111111", "text": "#7FDBFF"}
+colors = {"background": "#FFFFFF", "text": "#7FDBFF"}
 layout = html.Div(
     style={"backgroundColor": colors["background"]},
     children=[
         html.Img(
-            src=app.get_asset_url("Logo con corazon-01.png"),
+            src=app.get_asset_url("helpharma_logo.png"),
             alt="helPharma-Team12",
             width="200",
         ),
