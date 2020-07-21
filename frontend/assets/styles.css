@@ -1,0 +1,59 @@
+/*This document contains the styles that use the app. You can change these as you wish.*/
+
+.app-background {
+    text-align: center;
+}
+
+.ds4a-body {
+    margin-left: 18rem;
+    margin-right: 2rem;
+    padding: 2rem 1rem;
+    background-color: #F8F9F9;
+}
+
+.title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 120px;
+    width: 80%;
+    margin-left: 16rem;
+    margin-right: 2rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 16rem;
+    padding: 2rem 1rem;
+    background-color: #EEB462;
+}
+
+.logo {
+    width: 200px;
+}
+
+.lead {
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: bold;
+}
+
+.buttons{
+    /*background-color: #4CAF50; !* Green *!*/
+    border-radius: 4px;
+    border: 1px;
+    color: black;
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
