@@ -34,14 +34,24 @@ layout = html.Div(
                         dcc.Dropdown(
                             id="nutricion-dropdown-options",
                             options=[
-                                {"label": "Alta Nutricion", "value": "alta_por_nutricion"},
-                                {"label": "Desnutricion (IMC < 18.5)", "value": "desnutricion_imc_<_18_5"},
+                                {
+                                    "label": "Alta Nutricion",
+                                    "value": "alta_por_nutricion",
+                                },
+                                {
+                                    "label": "Desnutricion (IMC < 18.5)",
+                                    "value": "desnutricion_imc_<_18_5",
+                                },
                                 {
                                     "label": "Obesidad (IMC > 30, sin medic.)",
                                     "value": "obesidad_imc_>30_sin_medicamento_de_ajuste",
                                 },
                             ],
-                            value=["alta_por_nutricion", "desnutricion_imc_<_18_5", "obesidad_imc_>30_sin_medicamento_de_ajuste"],
+                            value=[
+                                "alta_por_nutricion",
+                                "desnutricion_imc_<_18_5",
+                                "obesidad_imc_>30_sin_medicamento_de_ajuste",
+                            ],
                             multi=True,
                         ),
                         dcc.Graph(
@@ -68,6 +78,4 @@ def nutricion_update(input_value):
     :param input_value:
     :return:
     """
-    return px.bar(
-        nutricion_df, x="anno", y=input_value, barmode="group"
-    )
+    return px.bar(nutricion_df, x="anno", y=input_value, barmode="group")

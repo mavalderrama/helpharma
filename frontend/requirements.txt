@@ -3,3 +3,5 @@ plotly
 pandas
 xlrd
 dash-bootstrap-components
+sqlalchemy
+psycopg2
