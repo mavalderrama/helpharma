@@ -25,7 +25,7 @@ sidebar = html.Div(
             [
                 dbc.NavLink("Home", href="/", id="page-1-link"),
                 dbc.NavLink("Models", href="/models", id="page-2-link"),
-                dbc.NavLink("Insights", href="/insights", id="page-3-link"),
+                dbc.NavLink("Nutrición", href="/nutricion", id="page-3-link"),
             ],
             vertical=True,
             pills=True,
@@ -62,7 +62,7 @@ def toggle_active_links(pathname):
         return True, False, False
     if pathname == "/models":
         return False, True, False
-    if pathname == "/insights":
+    if pathname == "/nutricion":
         return False, False, True
 
 

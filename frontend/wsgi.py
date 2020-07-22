@@ -6,7 +6,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app
-from server import riesgo_asociado_layout, dashboard
+from server import riesgo_asociado_layout, dashboard, nutricion_layout
 
 CONTENT_STYLE = {
     "margin-left": "18rem",
@@ -31,8 +31,8 @@ def display_page(pathname):
         return riesgo_asociado_layout.layout
     elif pathname == "/models":
         return riesgo_asociado_layout.layout
-    elif pathname == "/insights":
-        return riesgo_asociado_layout.layout
+    elif pathname == "/nutricion":
+        return nutricion_layout.layout
     else:
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(

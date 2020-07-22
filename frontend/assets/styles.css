@@ -32,7 +32,7 @@
     bottom: 0;
     width: 16rem;
     padding: 2rem 1rem;
-    background-color: #EEB462;
+    background-color: #e4f5f2;
 }
 
 .logo {
@@ -40,7 +40,7 @@
 }
 
 .lead {
-    color: #FFFFFF;
+    color: #000000;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     font-weight: bold;
