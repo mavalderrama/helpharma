@@ -4,4 +4,4 @@ pandas
 xlrd
 dash-bootstrap-components
 SQLAlchemy
-psycopg2
+psycopg2-binary
