@@ -32,7 +32,7 @@ def display_page(pathname):
     elif pathname == "/models":
         return riesgo_asociado_layout.layout
     elif pathname == "/insights":
-        return riesgo_asociado_layout.layout
+        return 404
     else:
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(
