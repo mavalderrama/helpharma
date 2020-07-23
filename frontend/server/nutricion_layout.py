@@ -4,7 +4,7 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 
 from app import app
-from .plots.nutricion import nutricion_asociado, nutricion_df
+from .plots.nutricion import nutricion_desnutricion_fig, nutricion_desnutricion_df
 
 # Define my layout
 # Adding more CSS styles
@@ -57,7 +57,7 @@ layout = html.Div(
                         dcc.Graph(
                             id="nutricion-graph",
                             animate=True,
-                            figure=nutricion_asociado,
+                            figure=nutricion_desnutricion_fig,
                         ),
                     ],
                     className="six columns",
@@ -78,4 +78,4 @@ def nutricion_update(input_value):
     :param input_value:
     :return:
     """
-    return px.bar(nutricion_df, x="anno", y=input_value, barmode="group")
+    return px.bar(nutricion_desnutricion_df, x="anno", y=input_value, barmode="group")
