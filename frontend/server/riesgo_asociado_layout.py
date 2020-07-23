@@ -5,6 +5,7 @@ from dash.dependencies import Input, Output
 
 from app import app
 from .plots.riesgo_asociado import figura_riesgo_asociado, consultas_totales_df
+from .plots.terapias import terapia_df, terapia_tot
 
 # Define my layout
 # Adding more CSS styles
@@ -49,6 +50,27 @@ layout = html.Div(
                             animate=True,
                             figure=figura_riesgo_asociado,
                         ),
+
+                        dcc.Dropdown(
+                            id="terapias-options",
+                            options=[
+                                {
+                                    "label": "Alta del Programa", 
+                                    "value": "Alta del Programa"
+                                },
+                                {
+                                    "label": "Seguimiento Presencial",
+                                    "value": "SEGUIMIENTO PRESENCIAL",
+                                },
+                            ],
+                            value=["Alta del Programa", "SEGUIMIENTO PRESENCIAL"],
+                            multi=True,
+                        ),
+                        dcc.Graph(
+                            id="terapias-graph",
+                            animate=True,
+                            figure=terapia_tot,
+                        ),                        
                     ],
                     className="six columns",
                 )
@@ -70,4 +92,18 @@ def update_figure_riesgo_asociado(input_value):
     """
     return px.bar(
         consultas_totales_df, x="Consultas_totales", y=input_value, barmode="group"
+    )
+
+@app.callback(
+    Output(component_id="terapias-graph", component_property="figure"),
+    [Input(component_id="terapias-options", component_property="value")],
+)
+def update_terapias(input_value):
+    """
+    update figure riesgo asociado
+    :param input_value:
+    :return:
+    """
+    return px.bar(
+        terapia_df, x="Terapias_totales", y=input_value, barmode="group"
     )
