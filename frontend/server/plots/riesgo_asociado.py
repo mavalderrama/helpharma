@@ -5,7 +5,7 @@ import plotly.express as px
 
 from .database.db import runQuery
 
-#riesgo_asociado_df = pd.read_excel(list(Path("../").glob("**/riesgo_asociado.xlsx"))[0])
+# riesgo_asociado_df = pd.read_excel(list(Path("../").glob("**/riesgo_asociado.xlsx"))[0])
 riesgo_asociado_df = runQuery("select * from riesgo_asociado")
 
 IDs_Unicos = riesgo_asociado_df[["ID", "Resultado Total", "Fecha"]].copy()

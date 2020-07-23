@@ -1,4 +1,3 @@
-
 import pandas as pd
 import plotly.express as px
 
@@ -7,21 +6,23 @@ from .database.db import runQuery
 
 nutricion_full_df = runQuery("select * from nutricion_y_dietetica_df")
 
-nutricion_full_df["semestre"] = nutricion_full_df["mes"].apply(lambda x: 0 if x <7 else 1)
+nutricion_full_df["semestre"] = nutricion_full_df["mes"].apply(
+    lambda x: 0 if x < 7 else 1
+)
 
 nutricion_anno_df = nutricion_full_df.groupby(["anno"]).sum().reset_index()
 
-       
+
 # 'hba1c_>7',
-#'hta_controlada', 
+#'hta_controlada',
 # 'hta_no_controlada',
 #'otro_motivo',
 #'pacientes_con_sobrepeso_imc_25-29',
-#'sin_medicamento_que_requiera_ajuste', 
+#'sin_medicamento_que_requiera_ajuste',
 #'tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so'
 
 ### Desnutricion
-       
+
 nutricion_desnutricion_df = nutricion_anno_df[
     [
         "anno",
@@ -32,12 +33,12 @@ nutricion_desnutricion_df = nutricion_anno_df[
         "dislipidema_colesterol_total_>200_tg_>150",
         "sindrome_metabolico",
         "hba1c_>7",
-        "hta_controlada", 
+        "hta_controlada",
         "hta_no_controlada",
         "otro_motivo",
         "pacientes_con_sobrepeso_imc_25-29",
-        "sin_medicamento_que_requiera_ajuste", 
-        "tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so",     
+        "sin_medicamento_que_requiera_ajuste",
+        "tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so",
     ]
 ]
 
@@ -50,14 +51,14 @@ nutricion_desnutricion_fig = px.bar(
         "obesidad_imc_>30_sin_medicamento_de_ajuste",
         "diabetes_controlada",
         "dislipidema_colesterol_total_>200_tg_>150",
-        "sindrome_metabolico", 
+        "sindrome_metabolico",
         "hba1c_>7",
-        "hta_controlada", 
+        "hta_controlada",
         "hta_no_controlada",
         "otro_motivo",
         "pacientes_con_sobrepeso_imc_25-29",
-        "sin_medicamento_que_requiera_ajuste", 
-        "tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so",                    
+        "sin_medicamento_que_requiera_ajuste",
+        "tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so",
     ],
     barmode="group",
 )
@@ -85,5 +86,5 @@ nutricion_sintomas_fig = px.bar(
 )
 
 # Otros sintomas
-#nutricion_frecuencias = df_nutricion.groupby(["anno", "semestre", "frecuencia_cita"])["frecuencia_cita"].count()
-#nutricion_frecuencias.rename()
+# nutricion_frecuencias = df_nutricion.groupby(["anno", "semestre", "frecuencia_cita"])["frecuencia_cita"].count()
+# nutricion_frecuencias.rename()
