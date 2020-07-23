@@ -6,6 +6,9 @@ from .database.db import runQuery
 
 
 nutricion_full_df = runQuery("select * from nutricion_y_dietetica_df")
+
+nutricion_full_df["semestre"] = nutricion_full_df["mes"].apply(lambda x: 0 if x <7 else 1)
+
 nutricion_anno_df = nutricion_full_df.groupby(["anno"]).sum().reset_index()
 
        
@@ -80,3 +83,7 @@ nutricion_sintomas_fig = px.bar(
     ],
     barmode="group",
 )
+
+# Otros sintomas
+#nutricion_frecuencias = df_nutricion.groupby(["anno", "semestre", "frecuencia_cita"])["frecuencia_cita"].count()
+#nutricion_frecuencias.rename()
