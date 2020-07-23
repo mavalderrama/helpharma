@@ -4,11 +4,22 @@ from dash.dependencies import Input, Output
 
 from app import app
 
+logos = html.Div(
+    children=[
+        html.Img(
+            src=app.get_asset_url("helpharma_logo.png"),
+            id="helpharma_logo",
+            className="logo",
+        )
+    ],
+)
+
 #############################################################################
 # Sidebar Layout
 #############################################################################
 sidebar = html.Div(
     [
+        logos,
         html.Hr(style={"height": "0.5px", "background-color": "#ccc"}),
         html.P("DS4A - Team 12", className="lead"),
         dbc.Nav(
