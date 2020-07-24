@@ -13,8 +13,6 @@ CONTENT_STYLE = {
     "margin-right": "2rem",
     "padding": "2rem 1rem",
     "margin-top": "6rem",
-    "width": "100%",
-    "z-index": "999",
 }
 content = html.Div(id="dashboard_content", style=CONTENT_STYLE)
 
