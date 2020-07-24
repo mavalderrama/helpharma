@@ -37,11 +37,6 @@ sidebar = html.Div(
 #############################################################################
 # Title Layout
 #############################################################################
-title = html.Div(
-    className="title",
-    children=[html.H1("Treatment Failure Diagnostic Decision Support System")],
-    id="title",
-)
 
 
 @app.callback(
@@ -67,4 +62,4 @@ def toggle_active_links(pathname):
         return False, False, True
 
 
-dashboard = html.Div([sidebar, title])
+dashboard = html.Div([sidebar])

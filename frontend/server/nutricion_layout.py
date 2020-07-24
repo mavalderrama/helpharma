@@ -4,28 +4,23 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 
 from app import app
-from .plots.nutricion import nutricion_desnutricion_fig, nutricion_desnutricion_df, \
-                             nutricion_sintomas_fig, nutricion_sintomas_df
+from .plots.nutricion import (
+    nutricion_desnutricion_fig,
+    nutricion_desnutricion_df,
+    nutricion_sintomas_fig,
+    nutricion_sintomas_df,
+)
 
 # Define my layout
 # Adding more CSS styles
 colors = {"background": "#FFFFFF", "text": "#7FDBFF"}
+
+title = html.Div(className="title", children=[html.H1("Nutrition Board")], id="title",)
+
 layout = html.Div(
     style={"backgroundColor": colors["background"]},
     children=[
-        html.Img(
-            src=app.get_asset_url("helpharma_logo.png"),
-            alt="helPharma-Team12",
-            width="200",
-        ),
-        html.H1(
-            children="Biologic therapy for Psoriasis treatment | Failure estimation diagnostic decision support system | Nutrición"
-        ),
-        html.Div(
-            children="""
-        Team 12 - DS4A_2020.
-    """
-        ),
+        title,
         # html.Label('Multi-Select Dropdown of Risk Levels'),
         html.Div(
             className="row",
@@ -58,37 +53,26 @@ layout = html.Div(
                                 {
                                     "label": "Sindrome Metabolico",
                                     "value": "sindrome_metabolico",
-                                },                                
-
-                                {
-                                    "label": "hba1c >7",
-                                    "value": "hba1c_>7",
-                                },  
-                                {
-                                    "label": "HTA controlada",
-                                    "value": "hta_controlada",
-                                },  
+                                },
+                                {"label": "hba1c >7", "value": "hba1c_>7",},
+                                {"label": "HTA controlada", "value": "hta_controlada",},
                                 {
                                     "label": "HTA no controlada",
                                     "value": "hta_no_controlada",
-                                },  
+                                },
                                 {
                                     "label": "Pacientes sobrepeso imc 25-29",
                                     "value": "pacientes_con_sobrepeso_imc_25-29",
-                                },  
+                                },
                                 {
                                     "label": "Sin medic. requiera ajuste",
                                     "value": "sin_medicamento_que_requiera_ajuste",
-                                },  
+                                },
                                 {
                                     "label": "Tratamiento con medic. ajuste peso",
                                     "value": "tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so",
-                                },  
-                                {
-                                    "label": "Otro motivo",
-                                    "value": "otro_motivo",
-                                },                                                                                                                                                                                                  
-
+                                },
+                                {"label": "Otro motivo", "value": "otro_motivo",},
                             ],
                             value=[
                                 "alta_por_nutricion",
@@ -98,24 +82,20 @@ layout = html.Div(
                                 "dislipidema_colesterol_total_>200_tg_>150",
                                 "sindrome_metabolico",
                                 "hba1c_>7",
-                                "hta_controlada", 
+                                "hta_controlada",
                                 "hta_no_controlada",
                                 "otro_motivo",
                                 "pacientes_con_sobrepeso_imc_25-29",
-                                "sin_medicamento_que_requiera_ajuste", 
-                                "tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so",                                     
+                                "sin_medicamento_que_requiera_ajuste",
+                                "tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so",
                             ],
                             multi=True,
                         ),
-
-                       
                         dcc.Graph(
                             id="nutricion-graph",
                             animate=True,
                             figure=nutricion_desnutricion_fig,
                         ),
-
-
                         dcc.Dropdown(
                             id="nutricion-sintomas-options",
                             options=[
@@ -138,20 +118,17 @@ layout = html.Div(
                                 "sindrome_metabolico",
                             ],
                             multi=True,
-                        ), 
-
+                        ),
                         dcc.Graph(
                             id="nutricion-sintomas-graph",
                             animate=True,
                             figure=nutricion_sintomas_fig,
-                        ),   
-
+                        ),
                         dcc.Graph(
                             id="nutricion-sintomas-graph2",
                             animate=True,
                             figure=px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8]),
-                        ),   
-
+                        ),
                     ],
                     className="six columns",
                 )
@@ -161,8 +138,9 @@ layout = html.Div(
 )
 
 
-#fig = px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8])
-#fig.show()
+# fig = px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8])
+# fig.show()
+
 
 @app.callback(
     Output(component_id="nutricion-graph", component_property="figure"),
@@ -175,6 +153,7 @@ def nutricion_update(input_value):
     :return:
     """
     return px.bar(nutricion_desnutricion_df, x="anno", y=input_value, barmode="group")
+
 
 @app.callback(
     Output(component_id="nutricion-sintomas-graph", component_property="figure"),

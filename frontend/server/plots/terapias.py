@@ -3,9 +3,9 @@ import plotly.express as px
 
 from pathlib import Path
 
-#riesgo_asociado_df = pd.read_excel(list(Path("../").glob("**/riesgo_asociado.xlsx"))[0])
+# riesgo_asociado_df = pd.read_excel(list(Path("../").glob("**/riesgo_asociado.xlsx"))[0])
 ## Terapia Fisica (1,2) ##
-#df_Terapia_fisica = pd.read_excel("static_files/terapia_fisica.xlsx")
+# df_Terapia_fisica = pd.read_excel("static_files/terapia_fisica.xlsx")
 
 df_Terapia_fisica = pd.read_excel(list(Path("../").glob("**/terapia_fisica.xlsx"))[0])
 
