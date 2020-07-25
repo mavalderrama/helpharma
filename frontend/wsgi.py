@@ -34,8 +34,8 @@ def display_page(pathname):
         return riesgo_asociado_layout.layout
     elif pathname == "/nutricion":
         return nutricion_layout.layout
-    elif pathname == "/insights":
-        return 404
+    elif pathname == "/terapias":
+        return riesgo_asociado_layout.layout
     else:
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(
