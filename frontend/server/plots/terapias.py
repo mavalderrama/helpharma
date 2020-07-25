@@ -2,12 +2,9 @@ import pandas as pd
 import plotly.express as px
 
 from pathlib import Path
+from .database.db import runQuery
 
-# riesgo_asociado_df = pd.read_excel(list(Path("../").glob("**/riesgo_asociado.xlsx"))[0])
-## Terapia Fisica (1,2) ##
-# df_Terapia_fisica = pd.read_excel("static_files/terapia_fisica.xlsx")
-
-df_Terapia_fisica = pd.read_excel(list(Path("../").glob("**/terapia_fisica.xlsx"))[0])
+df_Terapia_fisica = runQuery("select * from terapia_fisica")
 
 IDs_Unicos = df_Terapia_fisica[["id", "Modalidad cita", "Fecha"]].copy()
 IDs_Unicos = (
