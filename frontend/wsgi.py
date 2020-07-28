@@ -6,7 +6,13 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app
-from server import riesgo_asociado_layout, dashboard, nutricion_layout
+from server import (
+    riesgo_asociado_layout,
+    dashboard,
+    nutricion_layout,
+    home_layout,
+    models_layout,
+)
 
 CONTENT_STYLE = {
     "margin-left": "18rem",
@@ -29,9 +35,9 @@ def display_page(pathname):
     :return:
     """
     if pathname == "/":
-        return riesgo_asociado_layout.layout
+        return home_layout.layout
     elif pathname == "/models":
-        return riesgo_asociado_layout.layout
+        return models_layout.layout
     elif pathname == "/nutricion":
         return nutricion_layout.layout
     elif pathname == "/terapias":
@@ -51,6 +57,6 @@ def display_page(pathname):
 if __name__ == "__main__":
     # app.run_server(debug=True)
     if len(sys.argv) > 1:
-        app.run_server(host="0.0.0.0", port=sys.argv[1])
+        app.run_server(host="0.0.0.0", port=sys.argv[1], threaded=True)
     else:
-        app.run_server(host="0.0.0.0", port=8080, debug=True)
+        app.run_server(host="0.0.0.0", port=8080, debug=True, threaded=True)

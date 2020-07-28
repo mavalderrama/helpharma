@@ -15,7 +15,9 @@ from .plots.nutricion import (
 # Adding more CSS styles
 colors = {"background": "#FFFFFF", "text": "#7FDBFF"}
 
-title = html.Div(className="title", children=[html.H1("Nutrition Board")], id="title",)
+title = html.Div(
+    className="title", children=[html.H1("Nutrition Board")], id="nutrition_title"
+)
 
 layout = html.Div(
     style={"backgroundColor": colors["background"]},
