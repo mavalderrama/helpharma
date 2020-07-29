@@ -13,14 +13,6 @@ nutricion_full_df["semestre"] = nutricion_full_df["mes"].apply(
 nutricion_anno_df = nutricion_full_df.groupby(["anno"]).sum().reset_index()
 
 
-# 'hba1c_>7',
-#'hta_controlada',
-# 'hta_no_controlada',
-#'otro_motivo',
-#'pacientes_con_sobrepeso_imc_25-29',
-#'sin_medicamento_que_requiera_ajuste',
-#'tratamiento_con_medicamento_que_requiera_ajuste_por_peso_con_so'
-
 ### Desnutricion
 
 nutricion_desnutricion_df = nutricion_anno_df[
