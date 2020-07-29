@@ -56,11 +56,11 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
                 "imc",  # variables generales
                 indicator,
             ]
-        ]
-        .copy()
-        .groupby(["id", "fecha_consulta"])
-        .last()
+        ].copy()
+        # .groupby(["id", "fecha_consulta"])
+        # .last()
     )
+
     df_indicator.dropna(subset=[indicator], inplace=True)
     df_indicator = df_indicator.reset_index()
 
@@ -69,11 +69,10 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
     else:
         df_indicator = df_indicator[df_indicator["id"].isin([id_pat])]
 
-    df_indicator["weeks_acum"] = (
-        df_indicator["fecha_consulta"].dt.to_period("W").diff(1)
-    )
+    df_indicator["weeks_acum"] = df_indicator["fecha_consulta"].dt.to_period("W").diff()
 
     df_indicator.dropna(subset=["weeks_acum"], inplace=True)
+    print("indi", df_indicator.shape)
 
     df_indicator["weeks_acum"] = df_indicator["weeks_acum"].apply(lambda x: x.n)
 
