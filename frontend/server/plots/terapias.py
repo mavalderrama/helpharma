@@ -1,7 +1,6 @@
 import pandas as pd
 import plotly.express as px
 
-from pathlib import Path
 from .database.db import runQuery
 
 df_Terapia_fisica = runQuery("select * from terapia_fisica")

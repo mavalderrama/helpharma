@@ -1,8 +1,6 @@
-import pandas as pd
 import plotly.express as px
 
 from .database.db import runQuery
-
 
 nutricion_full_df = runQuery("select * from nutricion_y_dietetica_df")
 
