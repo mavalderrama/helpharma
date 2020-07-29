@@ -35,6 +35,7 @@ def display_page(pathname):
     :return:
     """
     if pathname == "/":
+        app.title = "Dashboard"
         return home_layout.layout
     elif pathname == "/models":
         return models_layout.layout

@@ -13,6 +13,17 @@ nutricion_anno_df = nutricion_full_df.groupby(["anno"]).sum().reset_index()
 
 ### Desnutricion
 
+desnutricion_df = nutricion_full_df[~nutricion_full_df["desnutricion_imc_<_18_5"].isnull()][["id", "fecha", "desnutricion_imc_<_18_5"]].sort_values(["id", "fecha"], ascending=False).drop_duplicates(["id"])["desnutricion_imc_<_18_5"].astype("float")
+desnutricion_sum = desnutricion_df.sum()
+
+### Sobrepeso
+
+obesidad_df = nutricion_full_df[~nutricion_full_df["obesidad_imc_>30_sin_medicamento_de_ajuste"].isnull()][["id", "fecha", "obesidad_imc_>30_sin_medicamento_de_ajuste"]].sort_values(["id", "fecha"], ascending=False).drop_duplicates(["id"])["obesidad_imc_>30_sin_medicamento_de_ajuste"].astype("float")
+obesidad_sum = obesidad_df.sum()
+
+
+### Nutricion
+
 nutricion_desnutricion_df = nutricion_anno_df[
     [
         "anno",
