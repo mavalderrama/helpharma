@@ -1,4 +1,3 @@
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
 
@@ -30,6 +29,7 @@ sabana_df["pasi_rt"] = sabana_df[["pasi"]]
 sabana_df["weeks_acum"] = 0
 sabana_df = sabana_df.sort_values(by=["fecha_consulta"], ascending=True)
 
+
 # for name, group in sabana_df.groupby("id"):
 #     index = group.index
 #     sabana_df.loc[index, "weeks_acum"] = (
@@ -43,7 +43,6 @@ sabana_df = sabana_df.sort_values(by=["fecha_consulta"], ascending=True)
 
 
 def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
-
     df_indicator = (
         sabana_df[
             [

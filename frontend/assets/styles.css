@@ -46,7 +46,7 @@
     font-weight: bold;
 }
 
-.buttons{
+.buttons {
     /*background-color: #4CAF50; !* Green *!*/
     border-radius: 4px;
     border: 1px;
@@ -59,58 +59,58 @@
 }
 
 .pretty_container {
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  margin: 10px;
-  padding: 15px;
-  position: relative;
-  box-shadow: 2px 2px 2px lightgrey;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin: 10px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
 }
 
 .mini_container {
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  margin: 10px;
-  padding: 15px;
-  position: relative;
-  box-shadow: 2px 2px 2px lightgrey;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin: 10px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .centered {
-  text-align: center;
+    text-align: center;
 }
 
 .background_yellow {
-  background-color: #fee11a;
+    background-color: #fee11a;
 }
 
 .background_blue {
-  background-color: #c1e7e1;
+    background-color: #c1e7e1;
 }
 
 .background_red {
-  background-color: #f4c4b8;
+    background-color: #f4c4b8;
 }
 
 .background_green {
-  background-color: #badd99;
+    background-color: #badd99;
 }
 
 .container-display {
-  display: flex;
+    display: flex;
 }
 
 /* Self Clearing Goodness */
 .container:after,
 .row:after,
 .u-cf {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .button {

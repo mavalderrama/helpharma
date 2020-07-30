@@ -3,11 +3,29 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from .plots.models import plot_indicator
 
 from app import app
+from .plots.models import plot_indicator
 
-# layout = html.Div([dcc.Location(id="path"), html.Div(id="patient_id")])
+title = html.Div(
+    className="title", children=[html.H1("Analysis Result")], id="models_title",
+)
+
+
+layout = html.Div(
+    [
+        dcc.Location(id="path"),
+        html.Div(title),
+        html.Div(
+            [
+                dcc.Graph(id="pasi_graph", animate=True,),
+                dcc.Graph(id="dlqi_graph", animate=True,),
+                dcc.Graph(id="bsa_graph", animate=True,),
+            ],
+            id="grafico",
+        ),
+    ]
+)
 
 
 @app.callback(
@@ -35,18 +53,3 @@ def update_output(search):
 
 # dlqi_plot = plot_indicator('dlqi',identificador_paciente,'weeks')
 # bsa_plot = plot_indicator('bsa',identificador_paciente,'weeks')
-
-layout = html.Div(
-    [
-        dcc.Location(id="path"),
-        # html.Div(id="patient_id"),
-        html.Div(
-            [
-                dcc.Graph(id="pasi_graph", animate=True,),
-                dcc.Graph(id="dlqi_graph", animate=True,),
-                dcc.Graph(id="bsa_graph", animate=True,),
-            ],
-            id="grafico",
-        ),
-    ]
-)

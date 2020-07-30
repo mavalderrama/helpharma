@@ -7,7 +7,6 @@ from app import app
 from .plots.nutricion import (
     nutricion_desnutricion_fig,
     nutricion_desnutricion_df,
-    nutricion_sintomas_fig,
     nutricion_sintomas_df,
     medicamentos_distribucion_fig,
 )
@@ -104,7 +103,7 @@ layout = html.Div(
                             animate=True,
                             figure=medicamentos_distribucion_fig,
                         ),
-                        #dcc.Dropdown(
+                        # dcc.Dropdown(
                         #    id="nutricion-sintomas-options",
                         #    options=[
                         #        {
@@ -126,17 +125,17 @@ layout = html.Div(
                         #        "sindrome_metabolico",
                         #    ],
                         #    multi=True,
-                        #),
-                        #dcc.Graph(
+                        # ),
+                        # dcc.Graph(
                         #    id="nutricion-sintomas-graph",
                         #    animate=True,
                         #    figure=nutricion_sintomas_fig,
-                        #),
-                        #dcc.Graph(
+                        # ),
+                        # dcc.Graph(
                         #    id="nutricion-sintomas-graph2",
                         #    animate=True,
                         #    figure=px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8]),
-                        #),
+                        # ),
                     ],
                     className="six columns",
                 )
