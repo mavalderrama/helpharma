@@ -9,13 +9,16 @@ from .plots.nutricion import (
     nutricion_desnutricion_df,
     nutricion_sintomas_fig,
     nutricion_sintomas_df,
+    medicamentos_distribucion_fig,
 )
 
 # Define my layout
 # Adding more CSS styles
 colors = {"background": "#FFFFFF", "text": "#7FDBFF"}
 
-title = html.Div(className="title", children=[html.H1("Nutrition Board")], id="title",)
+title = html.Div(
+    className="title", children=[html.H1("Nutrition Board")], id="nutrition_title"
+)
 
 layout = html.Div(
     style={"backgroundColor": colors["background"]},
@@ -96,39 +99,44 @@ layout = html.Div(
                             animate=True,
                             figure=nutricion_desnutricion_fig,
                         ),
-                        dcc.Dropdown(
-                            id="nutricion-sintomas-options",
-                            options=[
-                                {
-                                    "label": "Diabetes Controlada",
-                                    "value": "diabetes_controlada",
-                                },
-                                {
-                                    "label": "Dislipidemia",
-                                    "value": "dislipidema_colesterol_total_>200_tg_>150",
-                                },
-                                {
-                                    "label": "Sindrome Metabolico",
-                                    "value": "sindrome_metabolico",
-                                },
-                            ],
-                            value=[
-                                "diabetes_controlada",
-                                "dislipidema_colesterol_total_>200_tg_>150",
-                                "sindrome_metabolico",
-                            ],
-                            multi=True,
-                        ),
                         dcc.Graph(
-                            id="nutricion-sintomas-graph",
+                            id="medicamentos-distribucion",
                             animate=True,
-                            figure=nutricion_sintomas_fig,
+                            figure=medicamentos_distribucion_fig,
                         ),
-                        dcc.Graph(
-                            id="nutricion-sintomas-graph2",
-                            animate=True,
-                            figure=px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8]),
-                        ),
+                        #dcc.Dropdown(
+                        #    id="nutricion-sintomas-options",
+                        #    options=[
+                        #        {
+                        #            "label": "Diabetes Controlada",
+                        #            "value": "diabetes_controlada",
+                        #        },
+                        #        {
+                        #            "label": "Dislipidemia",
+                        #            "value": "dislipidema_colesterol_total_>200_tg_>150",
+                        #        },
+                        #        {
+                        #            "label": "Sindrome Metabolico",
+                        #            "value": "sindrome_metabolico",
+                        #        },
+                        #    ],
+                        #    value=[
+                        #        "diabetes_controlada",
+                        #        "dislipidema_colesterol_total_>200_tg_>150",
+                        #        "sindrome_metabolico",
+                        #    ],
+                        #    multi=True,
+                        #),
+                        #dcc.Graph(
+                        #    id="nutricion-sintomas-graph",
+                        #    animate=True,
+                        #    figure=nutricion_sintomas_fig,
+                        #),
+                        #dcc.Graph(
+                        #    id="nutricion-sintomas-graph2",
+                        #    animate=True,
+                        #    figure=px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8]),
+                        #),
                     ],
                     className="six columns",
                 )
