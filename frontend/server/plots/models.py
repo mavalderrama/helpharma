@@ -1,5 +1,6 @@
 import plotly.express as px
 import plotly.graph_objs as go
+import pandas as pd
 
 from .database.db import runQuery
 
@@ -129,3 +130,23 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
         )
         # fig.show()
         return fig
+
+
+def get_model_params(user_id):
+    """
+    Return model params
+    :param user_id:
+    :return:
+    """
+    data = sabana_df[sabana_df["id"].isin([user_id])].copy()[
+        ["fecha_nacimiento", "pasi", "sexo_paciente", "imc", "dlqi", "bsa", "pga"]
+    ]
+
+    data = data.fillna(method="ffill").tail(1).reset_index()
+    data["edad"] = int(
+        ((pd.to_datetime("today") - data.tail(1)["fecha_nacimiento"]) / 365.25).apply(
+            lambda x: x.days
+        )
+    )
+
+    return data

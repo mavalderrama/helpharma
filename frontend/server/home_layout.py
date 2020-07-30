@@ -144,11 +144,11 @@ layout = html.Div(
                                                 dcc.Input(
                                                     id="patient_id",
                                                     type="search",
-                                                    placeholder="Patient ID",
+                                                    placeholder="ID del Paciente",
                                                     name="id",
                                                 ),
                                                 html.Button(
-                                                    "Analyze",
+                                                    "Buscar...",
                                                     className="button",
                                                     type="submit",
                                                     autoFocus=True,

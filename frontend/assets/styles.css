@@ -117,7 +117,7 @@
     display: inline-flex;
     width: 120px;
     border: 2px solid #111111;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     color: #111111;
     text-transform: uppercase;
     text-decoration: none;
@@ -125,4 +125,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+}
+
+input{
+    margin-right: 7px;
 }
