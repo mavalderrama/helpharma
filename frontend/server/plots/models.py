@@ -72,7 +72,7 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
     df_indicator["weeks_acum"] = df_indicator["fecha_consulta"].dt.to_period("W").diff()
 
     df_indicator.dropna(subset=["weeks_acum"], inplace=True)
-    print("indi", df_indicator.shape)
+    # print("indi", df_indicator.shape)
 
     df_indicator["weeks_acum"] = df_indicator["weeks_acum"].apply(lambda x: x.n)
 
