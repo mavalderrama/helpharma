@@ -123,13 +123,13 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
             )
         )
         fig.update_layout(
-            annotations=[dict(text='Records of '+str(indicator[:4])+' for '+str(id_pat), showarrow=False,
+            annotations=[dict(text='Records of '+str(indicator[:4]), showarrow=False,
                         xref='paper', yref='paper', 
-                        x=0.5, y=1.05,
+                        x=0.4, y=1.05,
                         xanchor='left', yanchor='bottom',
                         font=dict(size=16),align='center')],
             xaxis_title="Weeks since first appointment",
-            yaxis_title=str(indicator[:4]),
+            yaxis_title="Indicator",
             showlegend=False,
             plot_bgcolor="whitesmoke",
         )
