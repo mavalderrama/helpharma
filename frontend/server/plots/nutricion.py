@@ -198,6 +198,6 @@ medicamentos_distribucion_fig = px.pie(
     df_medicamentos,
     values="cantidad_personas",
     names="medicamentos",
-    title="Distribución de Medicamentos",
+    title="Drugs Distribution",
 )
 medicamentos_distribucion_fig.update_traces(textposition='inside', textinfo='percent+label')

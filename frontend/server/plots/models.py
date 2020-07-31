@@ -125,7 +125,7 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
         fig.update_layout(
             annotations=[
                 dict(
-                    text="Records of " + str(indicator[:4]),
+                    text="{} Records".format(str(indicator[:4]).upper()),
                     showarrow=False,
                     xref="paper",
                     yref="paper",
