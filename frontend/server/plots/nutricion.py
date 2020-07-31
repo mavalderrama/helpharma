@@ -200,4 +200,6 @@ medicamentos_distribucion_fig = px.pie(
     names="medicamentos",
     title="Drugs Distribution",
 )
-medicamentos_distribucion_fig.update_traces(textposition='inside', textinfo='percent+label')
+medicamentos_distribucion_fig.update_traces(
+    textposition="inside", textinfo="percent+label"
+)
