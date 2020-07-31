@@ -12,7 +12,7 @@ import numpy as np
 from app import app
 from .plots.models import plot_indicator, get_model_params
 
-model = list(Path(".").glob("**/model.joblib"))[0]
+model = list(Path(".").glob("**/model2.joblib"))[0]
 patient_data = pd.DataFrame()
 
 title = html.Div(
@@ -134,13 +134,9 @@ def update_figures(search):
     :return:
     """
     identificador_paciente = search.split("=")[1]
-    print("patient id: {}".format(identificador_paciente))
-    a = plot_indicator("pasi_rt", identificador_paciente, "weeks")
-    b = plot_indicator("dlqi", identificador_paciente, "weeks")
-    c = plot_indicator("bsa", identificador_paciente, "weeks")
-    a.labels = ({"mes": "Meses", "id": "Consultas"},)
+    # print("patient id: {}".format(identificador_paciente))
     return (
-        a,
+        plot_indicator("pasi_rt", identificador_paciente, "weeks"),
         plot_indicator("dlqi", identificador_paciente, "weeks"),
         plot_indicator("bsa", identificador_paciente, "weeks"),
     )
@@ -184,6 +180,7 @@ def update_patient_fields(search):
 )
 def calculate_result(n_clicks, medicamento):
     global patient_data
+    patient_data_copy = patient_data.copy()
     df_minmax = pd.DataFrame(
         data={
             "dlqi": [0, 30],
@@ -200,11 +197,11 @@ def calculate_result(n_clicks, medicamento):
     )
 
     for c in df_minmax.columns:
-        temp = patient_data[c].astype("float")
-        patient_data[c] = (temp - df_minmax[c]["min"]) / (
+        temp = patient_data_copy[c].astype("float")
+        patient_data_copy[c] = (temp - df_minmax[c]["min"]) / (
             df_minmax[c]["max"] - df_minmax[c]["min"]
         )
-    patient_data["sexo_paciente"] = patient_data["sexo_paciente"].apply(
+    patient_data_copy["sexo_paciente"] = patient_data_copy["sexo_paciente"].apply(
         lambda x: -1 if x == "m" else 1
     )
 
@@ -218,6 +215,7 @@ def calculate_result(n_clicks, medicamento):
         "ixekinumab": 0,
         "secukinumab": 0,
         "ustekinumab": 0,
+        "mometasona": 0,
     }
 
     medicinas[medicamento] = 1
@@ -228,13 +226,13 @@ def calculate_result(n_clicks, medicamento):
             np.array(
                 [
                     [
-                        patient_data["pasi"],
-                        patient_data["edad"],
-                        patient_data["sexo_paciente"],
-                        patient_data["imc"],
-                        patient_data["dlqi"],
-                        patient_data["bsa"],
-                        patient_data["pga"],
+                        patient_data_copy["pasi"],
+                        patient_data_copy["edad"],
+                        patient_data_copy["sexo_paciente"],
+                        patient_data_copy["imc"],
+                        patient_data_copy["dlqi"],
+                        patient_data_copy["bsa"],
+                        patient_data_copy["pga"],
                         medicinas["adalimumab"],
                         medicinas["certolizumab"],
                         medicinas["etanercept"],
@@ -244,35 +242,14 @@ def calculate_result(n_clicks, medicamento):
                         medicinas["ixekinumab"],
                         medicinas["secukinumab"],
                         medicinas["ustekinumab"],
+                        medicinas["mometasona"],
                     ],
                 ]
             )
         )
-        print(
-            "vector",
-            [
-                [
-                    patient_data["pasi"][0],
-                    patient_data["edad"][0],
-                    patient_data["sexo_paciente"][0],
-                    patient_data["imc"][0],
-                    patient_data["dlqi"][0],
-                    patient_data["bsa"][0],
-                    int(patient_data["pga"][0]),
-                    medicinas["adalimumab"],
-                    medicinas["certolizumab"],
-                    medicinas["etanercept"],
-                    medicinas["golimumab"],
-                    medicinas["guselkumab"],
-                    medicinas["infliximab"],
-                    medicinas["ixekinumab"],
-                    medicinas["secukinumab"],
-                    medicinas["ustekinumab"],
-                ],
-            ],
-        )
+
         print("proba: ", probability)
         return "The therapeutic failure rate for this patient is: {}%".format(
-            probability[0]
+            round(probability[0][1] * 100, 1)
         )
     return ""

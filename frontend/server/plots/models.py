@@ -97,7 +97,7 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
         )
         fig.update_layout(
             xaxis_title="Appointment date",
-            yaxis_title="Indicator: "+str(indicator),
+            yaxis_title="Indicator: " + str(indicator),
             showlegend=True,
             plot_bgcolor="whitesmoke",
         )
@@ -112,7 +112,7 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
 
     elif len(id_pat) != 0 and time_axe == "weeks":
         df_indicator = df_indicator[df_indicator["id"].isin([id_pat])]
-        print(df_indicator.shape)
+        # print(df_indicator.shape)
         fig = go.Figure()
         fig.add_trace(
             go.Scatter(
@@ -123,11 +123,20 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
             )
         )
         fig.update_layout(
-            annotations=[dict(text='Records of '+str(indicator[:4])+' for '+str(id_pat), showarrow=False,
-                        xref='paper', yref='paper', 
-                        x=0.5, y=1.05,
-                        xanchor='left', yanchor='bottom',
-                        font=dict(size=16),align='center')],
+            annotations=[
+                dict(
+                    text="Records of " + str(indicator[:4]) + " for " + str(id_pat),
+                    showarrow=False,
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=1.05,
+                    xanchor="left",
+                    yanchor="bottom",
+                    font=dict(size=16),
+                    align="center",
+                )
+            ],
             xaxis_title="Weeks since first appointment",
             yaxis_title=str(indicator[:4]),
             showlegend=False,
