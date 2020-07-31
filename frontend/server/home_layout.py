@@ -50,7 +50,7 @@ layout = html.Div(
                 ),
                 html.Div(
                     [
-                        html.H6("Desnutricion (IMC < 18.5)", className="bold"),
+                        html.H6("Malnutrition (IMC < 18.5)", className="bold"),
                         html.H5(
                             id="desnutricion_count",
                             children=str((desnutricion_sum / patients * 100).round(2))
@@ -65,7 +65,7 @@ layout = html.Div(
                 ),
                 html.Div(
                     [
-                        html.H6("Obesidad (IMC > 30)", className="bold"),
+                        html.H6("Obesity (IMC > 30)", className="bold"),
                         html.H5(
                             id="obesidad_sum",
                             children=str((obesidad_sum / patients * 100).round(2))
@@ -144,7 +144,7 @@ layout = html.Div(
                                                 dcc.Input(
                                                     id="patient_id",
                                                     type="search",
-                                                    placeholder="ID del Paciente",
+                                                    placeholder="Patient ID",
                                                     name="id",
                                                 ),
                                                 html.Button(

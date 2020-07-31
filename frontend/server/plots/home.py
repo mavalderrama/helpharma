@@ -26,7 +26,7 @@ consultas_fig = px.bar(
     consultas,
     x="mes",
     y="id",
-    title="Number of Medical Consultations on {}".format(now.year),
+    title="Number of Medical Consultations in {}".format(now.year),
     width=770,
     height=400,
     labels={"mes": "Month", "id": "Consultations"},

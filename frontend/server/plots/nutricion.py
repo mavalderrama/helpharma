@@ -198,5 +198,5 @@ medicamentos_distribucion_fig = px.pie(
     df_medicamentos,
     values="cantidad_personas",
     names="medicamentos",
-    title="Distribución de Medicamentos",
+    title="Drugs Distribution",
 )
