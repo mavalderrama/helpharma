@@ -45,26 +45,26 @@ layout = html.Div(
         html.Div(
             html.Div(
                 [
-                    html.H4("Analizar Paciente"),
+                    html.H4("Analyze Patient"),
                     html.Div(
                         [
                             html.Div(
                                 [
-                                    html.H5("Nombre:"),
+                                    html.H5("Name:"),
                                     html.Label(id="name", children="Jhon Doe"),
                                 ],
                                 style={"display": "block"},
                             ),
                             html.Div(
-                                [html.H5("Edad:"), html.Label(id="edad")],
+                                [html.H5("Age:"), html.Label(id="edad")],
                                 style={"display": "block"},
                             ),
                             html.Div(
-                                [html.H5("Sexo:"), html.Label(id="sexo")],
+                                [html.H5("Sex:"), html.Label(id="sexo")],
                                 style={"display": "block"},
                             ),
                             html.Div(
-                                [html.H5("IMC:"), html.Label(id="imc")],
+                                [html.H5("BMI:"), html.Label(id="imc")],
                                 style={"display": "block"},
                             ),
                             html.Div(
@@ -86,7 +86,7 @@ layout = html.Div(
                         ],
                         style={"column-count": "4"},
                     ),
-                    html.Div([html.H5("Medicamento a Suministrar"), radio]),
+                    html.Div([html.H5("Biological Treatment"), radio]),
                     html.Div(
                         [
                             html.Button(
@@ -104,8 +104,7 @@ layout = html.Div(
             className="pretty_container",
         ),
         html.H2(
-            "Histórico de Clinimetrías",
-            style={"text-align": "center", "padding-top": "20px"},
+            "Historical Data", style={"text-align": "center", "padding-top": "20px"},
         ),
         html.Div(
             [

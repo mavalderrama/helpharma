@@ -148,7 +148,7 @@ layout = html.Div(
                                                     name="id",
                                                 ),
                                                 html.Button(
-                                                    "Buscar...",
+                                                    "Search...",
                                                     className="button",
                                                     type="submit",
                                                     autoFocus=True,

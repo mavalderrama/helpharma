@@ -26,10 +26,10 @@ consultas_fig = px.bar(
     consultas,
     x="mes",
     y="id",
-    title="Número de Consultas en {}".format(now.year),
+    title="Number of Medical Consultations on {}".format(now.year),
     width=770,
     height=400,
-    labels={"mes": "Meses", "id": "Consultas"},
+    labels={"mes": "Month", "id": "Consultations"},
 )
 
 # DLQI
