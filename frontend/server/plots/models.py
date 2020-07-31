@@ -96,8 +96,8 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
             )
         )
         fig.update_layout(
-            xaxis_title="date",
-            yaxis_title=str(indicator),
+            xaxis_title="Appointment date",
+            yaxis_title="Indicator: "+str(indicator),
             showlegend=True,
             plot_bgcolor="whitesmoke",
         )
@@ -123,9 +123,14 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
             )
         )
         fig.update_layout(
-            xaxis_title="weeks_acum",
-            yaxis_title=str(indicator),
-            showlegend=True,
+            annotations=[dict(text='Records of '+str(indicator[:4])+' for '+str(id_pat), showarrow=False,
+                        xref='paper', yref='paper', 
+                        x=0.5, y=1.05,
+                        xanchor='left', yanchor='bottom',
+                        font=dict(size=16),align='center')],
+            xaxis_title="Weeks since first appointment",
+            yaxis_title=str(indicator[:4]),
+            showlegend=False,
             plot_bgcolor="whitesmoke",
         )
         # fig.show()
