@@ -103,16 +103,26 @@ layout = html.Div(
             ),
             className="pretty_container",
         ),
-        html.H2(
-            "Historical Data", style={"text-align": "center", "padding-top": "20px"},
-        ),
         html.Div(
             [
-                dcc.Graph(id="pasi_graph", animate=True,),
-                dcc.Graph(id="dlqi_graph", animate=True,),
-                dcc.Graph(id="bsa_graph", animate=True,),
+                html.H2(
+                    "Historical Data",
+                    style={
+                        "text-align": "center",
+                        "padding-top": "20px",
+                        "padding-bottom": "20px",
+                    },
+                ),
+                html.Div(
+                    [
+                        dcc.Graph(id="pasi_graph", animate=True,),
+                        dcc.Graph(id="dlqi_graph", animate=True,),
+                        dcc.Graph(id="bsa_graph", animate=True,),
+                    ],
+                    id="grafico",
+                ),
             ],
-            id="grafico",
+            className="pretty_container",
         ),
     ]
 )
