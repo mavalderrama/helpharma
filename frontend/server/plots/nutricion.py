@@ -174,7 +174,6 @@ medicamento_ustekinumab
 medicamento_vancomicina"""
 medicamentos = medicamentos_str.split("\n")
 
-# medicamentos_columns = 'id,' + ','.join(medicamentos)
 medicamentos_columns = '"id","' + '","'.join(medicamentos) + '"'
 df_medicamentos = runQuery(f"select {medicamentos_columns} from sabana_df")
 
@@ -190,7 +189,8 @@ for i in range(0, len(medicamentos)):
         .sort_values(["id"], ascending=False)
         .drop_duplicates(["id"])[medicamentos[i]]
         .sum()
-    )  # [full_medicamentos] #.head() #.drop_duplicates(["id"]) #.isnull().sum()
+    )
+
 df_medicamentos = pd.DataFrame(
     {"medicamentos": meds_array, "cantidad_personas": values_array}
 )
@@ -200,3 +200,4 @@ medicamentos_distribucion_fig = px.pie(
     names="medicamentos",
     title="Drugs Distribution",
 )
+medicamentos_distribucion_fig.update_traces(textposition='inside', textinfo='percent+label')
