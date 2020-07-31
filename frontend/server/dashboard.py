@@ -26,7 +26,9 @@ sidebar = html.Div(
             [
                 dbc.NavLink("Home", href="/", id="page-1-link"),
                 # dbc.NavLink("Models", href="/models", id="page-2-link"),
-                dbc.NavLink("Nutrición/Medicamentos", href="/nutricion", id="page-3-link"),
+                dbc.NavLink(
+                    "Nutrición/Medicamentos", href="/nutricion", id="page-3-link"
+                ),
                 dbc.NavLink("Terapias/Riesgo", href="/terapias", id="page-4-link"),
             ],
             vertical=True,
@@ -35,6 +37,8 @@ sidebar = html.Div(
     ],
     className="sidebar",
 )
+
+
 #############################################################################
 # Title Layout
 #############################################################################

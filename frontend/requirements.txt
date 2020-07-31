@@ -5,3 +5,4 @@ xlrd
 dash-bootstrap-components
 SQLAlchemy
 psycopg2-binary
+joblib

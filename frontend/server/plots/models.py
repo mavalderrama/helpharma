@@ -1,6 +1,6 @@
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
+import pandas as pd
 
 from .database.db import runQuery
 
@@ -30,6 +30,7 @@ sabana_df["pasi_rt"] = sabana_df[["pasi"]]
 sabana_df["weeks_acum"] = 0
 sabana_df = sabana_df.sort_values(by=["fecha_consulta"], ascending=True)
 
+
 # for name, group in sabana_df.groupby("id"):
 #     index = group.index
 #     sabana_df.loc[index, "weeks_acum"] = (
@@ -43,7 +44,6 @@ sabana_df = sabana_df.sort_values(by=["fecha_consulta"], ascending=True)
 
 
 def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
-
     df_indicator = (
         sabana_df[
             [
@@ -96,8 +96,8 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
             )
         )
         fig.update_layout(
-            xaxis_title="date",
-            yaxis_title=str(indicator),
+            xaxis_title="Appointment date",
+            yaxis_title="Indicator: "+str(indicator),
             showlegend=True,
             plot_bgcolor="whitesmoke",
         )
@@ -123,10 +123,35 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
             )
         )
         fig.update_layout(
-            xaxis_title="weeks_acum",
-            yaxis_title=str(indicator),
-            showlegend=True,
+            annotations=[dict(text='Records of '+str(indicator[:4])+' for '+str(id_pat), showarrow=False,
+                        xref='paper', yref='paper', 
+                        x=0.5, y=1.05,
+                        xanchor='left', yanchor='bottom',
+                        font=dict(size=16),align='center')],
+            xaxis_title="Weeks since first appointment",
+            yaxis_title=str(indicator[:4]),
+            showlegend=False,
             plot_bgcolor="whitesmoke",
         )
         # fig.show()
         return fig
+
+
+def get_model_params(user_id):
+    """
+    Return model params
+    :param user_id:
+    :return:
+    """
+    data = sabana_df[sabana_df["id"].isin([user_id])].copy()[
+        ["fecha_nacimiento", "pasi", "sexo_paciente", "imc", "dlqi", "bsa", "pga"]
+    ]
+
+    data = data.fillna(method="ffill").tail(1).reset_index()
+    data["edad"] = int(
+        ((pd.to_datetime("today") - data.tail(1)["fecha_nacimiento"]) / 365.25).apply(
+            lambda x: x.days
+        )
+    )
+
+    return data

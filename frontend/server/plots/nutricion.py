@@ -1,5 +1,5 @@
-import plotly.express as px
 import pandas as pd
+import plotly.express as px
 
 from .database.db import runQuery
 
@@ -13,14 +13,27 @@ nutricion_anno_df = nutricion_full_df.groupby(["anno"]).sum().reset_index()
 
 ### Desnutricion
 
-desnutricion_df = nutricion_full_df[~nutricion_full_df["desnutricion_imc_<_18_5"].isnull()][["id", "fecha", "desnutricion_imc_<_18_5"]].sort_values(["id", "fecha"], ascending=False).drop_duplicates(["id"])["desnutricion_imc_<_18_5"].astype("float")
+desnutricion_df = (
+    nutricion_full_df[~nutricion_full_df["desnutricion_imc_<_18_5"].isnull()][
+        ["id", "fecha", "desnutricion_imc_<_18_5"]
+    ]
+    .sort_values(["id", "fecha"], ascending=False)
+    .drop_duplicates(["id"])["desnutricion_imc_<_18_5"]
+    .astype("float")
+)
 desnutricion_sum = desnutricion_df.sum()
 
 ### Sobrepeso
 
-obesidad_df = nutricion_full_df[~nutricion_full_df["obesidad_imc_>30_sin_medicamento_de_ajuste"].isnull()][["id", "fecha", "obesidad_imc_>30_sin_medicamento_de_ajuste"]].sort_values(["id", "fecha"], ascending=False).drop_duplicates(["id"])["obesidad_imc_>30_sin_medicamento_de_ajuste"].astype("float")
+obesidad_df = (
+    nutricion_full_df[
+        ~nutricion_full_df["obesidad_imc_>30_sin_medicamento_de_ajuste"].isnull()
+    ][["id", "fecha", "obesidad_imc_>30_sin_medicamento_de_ajuste"]]
+    .sort_values(["id", "fecha"], ascending=False)
+    .drop_duplicates(["id"])["obesidad_imc_>30_sin_medicamento_de_ajuste"]
+    .astype("float")
+)
 obesidad_sum = obesidad_df.sum()
-
 
 ### Nutricion
 
@@ -161,7 +174,7 @@ medicamento_ustekinumab
 medicamento_vancomicina"""
 medicamentos = medicamentos_str.split("\n")
 
-#medicamentos_columns = 'id,' + ','.join(medicamentos)
+# medicamentos_columns = 'id,' + ','.join(medicamentos)
 medicamentos_columns = '"id","' + '","'.join(medicamentos) + '"'
 df_medicamentos = runQuery(f"select {medicamentos_columns} from sabana_df")
 
@@ -169,6 +182,21 @@ meds_array = []
 values_array = []
 for i in range(0, len(medicamentos)):
     meds_array.append(medicamentos[i])
-    values_array.append(df_medicamentos[(~df_medicamentos[medicamentos[i]].isnull()) & (df_medicamentos[medicamentos[i]] > 0)].sort_values(["id"], ascending=False).drop_duplicates(["id"])[medicamentos[i]].sum()) #[full_medicamentos] #.head() #.drop_duplicates(["id"]) #.isnull().sum()
-df_medicamentos = pd.DataFrame({"medicamentos": meds_array, "cantidad_personas": values_array})
-medicamentos_distribucion_fig = px.pie(df_medicamentos, values='cantidad_personas', names='medicamentos', title='Distribución de Medicamentos')
+    values_array.append(
+        df_medicamentos[
+            (~df_medicamentos[medicamentos[i]].isnull())
+            & (df_medicamentos[medicamentos[i]] > 0)
+        ]
+        .sort_values(["id"], ascending=False)
+        .drop_duplicates(["id"])[medicamentos[i]]
+        .sum()
+    )  # [full_medicamentos] #.head() #.drop_duplicates(["id"]) #.isnull().sum()
+df_medicamentos = pd.DataFrame(
+    {"medicamentos": meds_array, "cantidad_personas": values_array}
+)
+medicamentos_distribucion_fig = px.pie(
+    df_medicamentos,
+    values="cantidad_personas",
+    names="medicamentos",
+    title="Distribución de Medicamentos",
+)
