@@ -1,1 +1,1 @@
-Acc_0.72-Th_0.72-pasi_1-edad-sexo-imc_1-dlqi_1-bsa_1-pga_1-adalimumab-certolizumab-etanercept-golimumab-guselkumab-infliximab-ixekinumab-secukinumab-ustekinumab-mometasona
+Acc_0.72-Th_0.612-pasi_1-edad-sexo-imc_1-dlqi_1-bsa_1-pga_1-adalimumab-certolizumab-etanercept-golimumab-guselkumab-infliximab-ixekinumab-secukinumab-ustekinumab-mometasona
