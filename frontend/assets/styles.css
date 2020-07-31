@@ -127,6 +127,13 @@
     overflow: hidden;
 }
 
+.result{
+    padding-left: 15px;
+    font-weight: bold;
+    color: red
+}
+
 input{
     margin-right: 7px;
 }
+

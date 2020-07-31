@@ -72,7 +72,7 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
     df_indicator["weeks_acum"] = df_indicator["fecha_consulta"].dt.to_period("W").diff()
 
     df_indicator.dropna(subset=["weeks_acum"], inplace=True)
-    print("indi", df_indicator.shape)
+    # print("indi", df_indicator.shape)
 
     df_indicator["weeks_acum"] = df_indicator["weeks_acum"].apply(lambda x: x.n)
 
@@ -97,7 +97,7 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
         )
         fig.update_layout(
             xaxis_title="Appointment date",
-            yaxis_title="Indicator: "+str(indicator),
+            yaxis_title="Indicator: " + str(indicator),
             showlegend=True,
             plot_bgcolor="whitesmoke",
         )
@@ -112,7 +112,7 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
 
     elif len(id_pat) != 0 and time_axe == "weeks":
         df_indicator = df_indicator[df_indicator["id"].isin([id_pat])]
-        print(df_indicator.shape)
+        # print(df_indicator.shape)
         fig = go.Figure()
         fig.add_trace(
             go.Scatter(
@@ -123,11 +123,28 @@ def plot_indicator(indicator, id_pat=[], time_axe="weeks"):
             )
         )
         fig.update_layout(
+<<<<<<< HEAD
             annotations=[dict(text='Records of '+str(indicator[:4]), showarrow=False,
                         xref='paper', yref='paper', 
                         x=0.4, y=1.05,
                         xanchor='left', yanchor='bottom',
                         font=dict(size=16),align='center')],
+=======
+            annotations=[
+                dict(
+                    text="Records of " + str(indicator[:4]) + " for " + str(id_pat),
+                    showarrow=False,
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=1.05,
+                    xanchor="left",
+                    yanchor="bottom",
+                    font=dict(size=16),
+                    align="center",
+                )
+            ],
+>>>>>>> 533e769373a2b8f9220935a6e1a9a0595663c0cc
             xaxis_title="Weeks since first appointment",
             yaxis_title="Indicator",
             showlegend=False,

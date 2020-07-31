@@ -5,58 +5,38 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 from joblib import load
+from pathlib import Path
+import pandas as pd
+import numpy as np
 
 from app import app
 from .plots.models import plot_indicator, get_model_params
+
+model = list(Path(".").glob("**/model2.joblib"))[0]
+patient_data = pd.DataFrame()
 
 title = html.Div(
     className="title", children=[html.H1("Analysis Result")], id="models_title",
 )
 
+
 radio = dcc.RadioItems(
     id="medicamentos",
     options=[
-        {"label": "Adalimumab", "value": "a"},
-        {"label": "Certolizumab", "value": "b"},
-        {"label": "Etanercept", "value": "c"},
-        {"label": "Golimumab", "value": "d"},
-        {"label": "Guselkumab", "value": "e"},
-        {"label": "Infliximab", "value": "f"},
-        {"label": "Ixekinumab", "value": "g"},
-        {"label": "Secukinumab", "value": "h"},
-        {"label": "Ustekinumab", "value": "i"},
+        {"label": "Adalimumab", "value": "adalimumab"},
+        {"label": "Certolizumab", "value": "certolizumab"},
+        {"label": "Etanercept", "value": "etanercept"},
+        {"label": "Golimumab", "value": "golimumab"},
+        {"label": "Guselkumab", "value": "guselkumab"},
+        {"label": "Infliximab", "value": "infliximab"},
+        {"label": "Ixekinumab", "value": "ixekinumab"},
+        {"label": "Secukinumab", "value": "secukinumab"},
+        {"label": "Ustekinumab", "value": "ustekinumab"},
     ],
-    value="a",
+    value="adalimumab",
     labelStyle={"display": "block"},
     style={"column-count": "4"},
 )
-
-modal = html.Div(
-    [
-        dbc.Button("Open", id="open-centered"),
-        dbc.Modal(
-            [
-                dbc.ModalHeader("Header"),
-                dbc.ModalBody("This modal is vertically centered"),
-                dbc.ModalFooter(
-                    dbc.Button("Close", id="close-centered", className="ml-auto")
-                ),
-            ],
-            id="modal-centered",
-            centered=True,
-        ),
-    ]
-)
-
-"""
-pasi
-edad
-sexo
-imc
-dlqi
-bsa
-pga
-"""
 
 layout = html.Div(
     [
@@ -108,7 +88,15 @@ layout = html.Div(
                     ),
                     html.Div([html.H5("Medicamento a Suministrar"), radio]),
                     html.Div(
-                        [html.Button("Analizar", className="button", autoFocus=True,)],
+                        [
+                            html.Button(
+                                "Analyze",
+                                id="calculate_model",
+                                className="button",
+                                autoFocus=True,
+                            ),
+                            html.Label(id="analysis_result", className="result",),
+                        ],
                         style={"padding-top": "10px"},
                     ),
                 ]
@@ -146,7 +134,7 @@ def update_figures(search):
     :return:
     """
     identificador_paciente = search.split("=")[1]
-    print("patient id: {}".format(identificador_paciente))
+    # print("patient id: {}".format(identificador_paciente))
     return (
         plot_indicator("pasi_rt", identificador_paciente, "weeks"),
         plot_indicator("dlqi", identificador_paciente, "weeks"),
@@ -172,25 +160,96 @@ def update_patient_fields(search):
     :param search:
     :return:
     """
+    global patient_data
     identificador_paciente = search.split("=")[1]
-    data = get_model_params(identificador_paciente)
+    patient_data = get_model_params(identificador_paciente)
     return (
-        data["edad"],
-        data["sexo_paciente"],
-        data["imc"],
-        data["pasi"],
-        data["dlqi"],
-        data["bsa"],
-        data["pga"],
+        patient_data["edad"],
+        patient_data["sexo_paciente"],
+        patient_data["imc"],
+        patient_data["pasi"],
+        patient_data["dlqi"],
+        patient_data["bsa"],
+        patient_data["pga"],
     )
 
 
 @app.callback(
-    Output("modal-centered", "is_open"),
-    [Input("open-centered", "n_clicks"), Input("close-centered", "n_clicks")],
-    [State("modal-centered", "is_open")],
+    Output("analysis_result", "children"),
+    [Input("calculate_model", "n_clicks"), Input("medicamentos", "value")],
 )
-def toggle_modal(n1, n2, is_open):
-    if n1 or n2:
-        return not is_open
-    return is_open
+def calculate_result(n_clicks, medicamento):
+    global patient_data
+    patient_data_copy = patient_data.copy()
+    df_minmax = pd.DataFrame(
+        data={
+            "dlqi": [0, 30],
+            "imc": [10, 35],
+            "bsa": [0, 100],
+            "edad": [0, 100],
+            "pasi": [0, 72]
+            # "depresion_total": [0, 10],
+            # "ansiedad_total": [0, 10],
+            # "trastorno_sexual_total": [0, 10],
+            # "psi_total": [0, 10],
+        },
+        index=["min", "max"],
+    )
+
+    for c in df_minmax.columns:
+        temp = patient_data_copy[c].astype("float")
+        patient_data_copy[c] = (temp - df_minmax[c]["min"]) / (
+            df_minmax[c]["max"] - df_minmax[c]["min"]
+        )
+    patient_data_copy["sexo_paciente"] = patient_data_copy["sexo_paciente"].apply(
+        lambda x: -1 if x == "m" else 1
+    )
+
+    medicinas = {
+        "certolizumab": 0,
+        "adalimumab": 0,
+        "etanercept": 0,
+        "golimumab": 0,
+        "guselkumab": 0,
+        "infliximab": 0,
+        "ixekinumab": 0,
+        "secukinumab": 0,
+        "ustekinumab": 0,
+        "mometasona": 0,
+    }
+
+    medicinas[medicamento] = 1
+
+    if n_clicks:
+        clf = load(model)
+        probability = clf.predict_proba(
+            np.array(
+                [
+                    [
+                        patient_data_copy["pasi"],
+                        patient_data_copy["edad"],
+                        patient_data_copy["sexo_paciente"],
+                        patient_data_copy["imc"],
+                        patient_data_copy["dlqi"],
+                        patient_data_copy["bsa"],
+                        patient_data_copy["pga"],
+                        medicinas["adalimumab"],
+                        medicinas["certolizumab"],
+                        medicinas["etanercept"],
+                        medicinas["golimumab"],
+                        medicinas["guselkumab"],
+                        medicinas["infliximab"],
+                        medicinas["ixekinumab"],
+                        medicinas["secukinumab"],
+                        medicinas["ustekinumab"],
+                        medicinas["mometasona"],
+                    ],
+                ]
+            )
+        )
+
+        print("proba: ", probability)
+        return "The therapeutic failure rate for this patient is: {}%".format(
+            round(probability[0][1] * 100, 1)
+        )
+    return ""
