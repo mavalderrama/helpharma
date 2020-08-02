@@ -77,6 +77,10 @@ nutricion_desnutricion_fig = px.bar(
     barmode="group",
 )
 
+nutricion_desnutricion_fig.update_layout(
+    xaxis_title="Year", yaxis_title="Number of Patients"
+)
+
 # Otros sintomas
 
 nutricion_sintomas_df = nutricion_anno_df[
