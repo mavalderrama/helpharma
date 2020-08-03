@@ -7,11 +7,11 @@ from dash.dependencies import Input, Output
 
 from app import app
 from server import (
-    riesgo_asociado_layout,
     dashboard,
     nutricion_layout,
     home_layout,
     models_layout,
+    about_layout,
 )
 
 CONTENT_STYLE = {
@@ -41,6 +41,8 @@ def display_page(pathname):
         return models_layout.layout
     elif pathname == "/nutricion":
         return nutricion_layout.layout
+    elif pathname == "/about":
+        return about_layout.layout
     else:
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(

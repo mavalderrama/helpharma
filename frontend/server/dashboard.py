@@ -29,6 +29,7 @@ sidebar = html.Div(
                 dbc.NavLink(
                     "Nutrition/Medicaments", href="/nutricion", id="page-3-link"
                 ),
+                dbc.NavLink("About Team 12", href="/about", id="page-2-link"),
             ],
             vertical=True,
             pills=True,
@@ -44,7 +45,11 @@ sidebar = html.Div(
 
 
 @app.callback(
-    [Output("page-1-link", "active"), Output("page-3-link", "active"),],
+    [
+        Output("page-1-link", "active"),
+        Output("page-3-link", "active"),
+        Output("page-2-link", "active"),
+    ],
     [Input("url", "pathname")],
 )
 def toggle_active_links(pathname):
@@ -55,16 +60,13 @@ def toggle_active_links(pathname):
     """
     if pathname == "/":
         # Treat page 1 as the homepage / index
-        return (
-            True,
-            False,
-        )
+        return (True, False, False)
     if pathname == "/nutricion":
-        return False, True
-    if pathname == "/terapias":
-        return False, False
+        return False, True, False
+    if pathname == "/about":
+        return False, False, True
     else:
-        return True, False
+        return True, False, False
 
 
 dashboard = html.Div([sidebar])
